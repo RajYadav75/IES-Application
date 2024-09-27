@@ -1,5 +1,6 @@
 package in.raj.services;
 
+import in.raj.bindings.UnlockAccountForm;
 import in.raj.bindings.UserAccountForm;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface AccountService {
     public UserAccountForm getUserAccById(Integer accId);
 
     public String changeAccStatus(Integer accId,String status);
+
+    public String unlockUserAccount(UnlockAccountForm unlockAccountForm);
 }
