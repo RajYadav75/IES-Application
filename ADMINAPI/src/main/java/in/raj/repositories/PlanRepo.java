@@ -1,4 +1,7 @@
 package in.raj.repositories;
 
-public interface PlanRepo {
+import in.raj.entities.PlanEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PlanRepo extends JpaRepository<PlanEntity,Integer> {
 }
