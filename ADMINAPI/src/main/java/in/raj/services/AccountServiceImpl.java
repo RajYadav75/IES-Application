@@ -9,7 +9,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class AccountServiceImpl implements AccountService{
@@ -17,6 +20,7 @@ public class AccountServiceImpl implements AccountService{
     private UserRepo userRepo;
     @Autowired
     private EmailUtil emailUtil;
+
     @Override
     public boolean createUserAccount(UserAccountForm accForm) {
         UserEntity entity = new UserEntity();
@@ -27,9 +31,9 @@ public class AccountServiceImpl implements AccountService{
         entity.setAccStatus("LOCKED");
         entity.setActiveSw("Y");
         userRepo.save(entity);
-        //TODO-> Set Email
-        String subject  = "";
-        String body = "";
+        //TODO-> Send Email
+        String subject  = "User Registration";
+        String body = readEmailBody("REG_EMAIL_BODY.txt",entity);
         return emailUtil.sendEmail(subject, body, accForm.getEmail());
     }
 
@@ -97,6 +101,21 @@ public class AccountServiceImpl implements AccountService{
             char randomChar = alphaNumeric.charAt(index);
             //append the character to string builder
             sb.append(randomChar);
+        }
+        return sb.toString();
+    }
+
+    private String readEmailBody(String filename, UserEntity user){
+        StringBuilder sb = new StringBuilder();
+        try(Stream<String> lines = Files.lines(Paths.get(filename))){
+            lines.forEach(line -> {
+                line = line.replace("${FNAME}", user.getFullName());
+                line = line.replace("${TEMP_PWD}", user.getPwd());
+                line = line.replace("${EMAIL}", user.getEmail());
+                sb.append(line);
+            });
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return sb.toString();
     }

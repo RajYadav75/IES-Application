@@ -1,0 +1,12 @@
+Hi ${FNAME}  <br/>
+<br/>
+Welcome to Raj Application, Your registration is almost completed. <br/>
+<br/>
+Please unlock your account using below details.<br/>
+<br/>
+Temporary PWD:==> ${TEMP_PWD} <br/>
+<br/>
+<a href="http://localhost:4200/unlock?email=${EMAIL}">Click Here to Unlock</a><br/>
+<br/>
+Thanks,<br/>
+Raj Yadav.<br/>

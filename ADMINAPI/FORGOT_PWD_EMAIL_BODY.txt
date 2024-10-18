@@ -1,0 +1,8 @@
+Hi ${FNAME} ${LNAME}, <br/>
+ <br/>
+Please Find Your Password Below <br/>
+ <br/>
+ Your Password ::===> ${PWD}  <br/>
+  <br/>
+Thanks,  <br/>
+Raj Yadav.  <br/>
