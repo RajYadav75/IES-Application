@@ -20,6 +20,7 @@ public class ArServiceImpl implements ArService{
     private AppRepo appRepo;
     @Autowired
     private UserRepo userRepo;
+
     private static final String SSA_WEB_API_USR="https://ssa.web.app/{ssn}";
 
     @Override
@@ -36,13 +37,13 @@ public class ArServiceImpl implements ArService{
                 //valid citiazen app
                 UserEntity userEntity = userRepo.findById(app.getUserId()).get();
 
-                AppEntity entity = new AppEntity();
-                BeanUtils.copyProperties(app,entity);
+                AppEntity appEntity = new AppEntity();
+                BeanUtils.copyProperties(app,appEntity);
 
-                entity.setUser(userEntity);
+                appEntity.setUser(userEntity);
 
-                entity = appRepo.save(entity);
-                return "App Created with Case Num : "+entity.getCaseNum();
+                appEntity = appRepo.save(appEntity);
+                return "App Created with Case Num : "+appEntity.getCaseNum();
             }
         }catch (Exception e){
             throw new SSAWebException(e.getMessage());
