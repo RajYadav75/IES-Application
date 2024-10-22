@@ -75,6 +75,8 @@ public class EligServiceImpl implements EligService {
 
     @Override
     public boolean generateCo(Long caseNum) {
+        // get Ed Record based on casenum
+        // insert into co table
         return false;
     }
 }
