@@ -12,4 +12,35 @@ public class IncomeEntity {
     private Double rentIncome;
     private Double propertyIncome;
 
+    public Integer getIncomeId() {
+        return incomeId;
+    }
+
+    public void setIncomeId(Integer incomeId) {
+        this.incomeId = incomeId;
+    }
+
+    public Double getSalaryIncome() {
+        return salaryIncome;
+    }
+
+    public void setSalaryIncome(Double salaryIncome) {
+        this.salaryIncome = salaryIncome;
+    }
+
+    public Double getRentIncome() {
+        return rentIncome;
+    }
+
+    public void setRentIncome(Double rentIncome) {
+        this.rentIncome = rentIncome;
+    }
+
+    public Double getPropertyIncome() {
+        return propertyIncome;
+    }
+
+    public void setPropertyIncome(Double propertyIncome) {
+        this.propertyIncome = propertyIncome;
+    }
 }
