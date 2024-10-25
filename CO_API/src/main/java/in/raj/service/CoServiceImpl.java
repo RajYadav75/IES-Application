@@ -31,23 +31,24 @@ public class CoServiceImpl implements CoService{
     private CoNoticeRepo noticeRepo;
     @Autowired
     private EligRepo eligRepo;
+    @Autowired
+    private DcCaseRepo dcCaseRepo;
+    @Autowired
+    private CitizenAppRepo appRepo;
 
     @Autowired
     private EmailUtils emailUtils;
     @Autowired
     private CoTriggerRepo coTriggerRepo;
     @Autowired
-    private EmailUtils emailUtils;
-    @Autowired
     private AmazonS3 s3;
     @Value("${bucketName}")
     private String bucketName;
 
     @Override
-    public void processPendingTriggers() {
-        CoResponse response = new CoResponse();
+    public CoResponse processPendingTriggers()throws Exception {
         // Fetch All Pending triggers from co_notices tables
-        List<CoTriggerEntity> pendingTrgs = CoTrgRepo.findByTrgStatus("Pending");
+        List<CoTriggerEntity> pendingTrgs = coTriggerRepo.findByTrgStatus("Pending");
 
         for (CoTriggerEntity trigger : pendingTrgs){
             processEachRecord(trigger);
