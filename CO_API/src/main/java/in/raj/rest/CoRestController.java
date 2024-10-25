@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CoBatchRestController {
+public class CoRestController {
     @Autowired
     private CoService service;
-    @GetMapping("/notices")
-    public String processNotices(){
-        service.processPendingTriggers();
-        return "success";
+
+    @GetMapping("/process")
+    public CoResponse processTriggers() throws Exception{
+
+        return service.processPendingTriggers();
     }
 }
