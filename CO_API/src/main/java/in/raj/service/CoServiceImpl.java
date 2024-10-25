@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.net.URL;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -52,9 +51,10 @@ public class CoServiceImpl implements CoService{
     public CoResponse processPendingTriggers()throws Exception {
         // Fetch All Pending triggers from co_notices tables
         List<CoTriggerEntity> pendingTrgs = coTriggerRepo.findByTrgStatus("P");
-
+        // Create Thread Pool
         ExecutorService exService = Executors.newFixedThreadPool(20);
         for (CoTriggerEntity trigger : pendingTrgs){
+            // submit task to thread
             exService.submit(new Runnable() {
                 @Override
                 public void run() {
